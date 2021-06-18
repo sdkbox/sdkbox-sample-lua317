@@ -253,3 +253,4 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(':libcocos2dx')
 }
+dependencies { compile 'com.android.billingclient:billing:3.0.2' }

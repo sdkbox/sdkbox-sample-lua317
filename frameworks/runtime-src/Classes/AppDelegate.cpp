@@ -25,6 +25,11 @@
 #include "AppDelegate.h"
 #include "scripting/lua-bindings/manual/CCLuaEngine.h"
 #include "cocos2d.h"
+#ifdef SDKBOX_ENABLED
+#include "SDKBoxLuaHelper.h"
+#include "PluginIAPLua.hpp"
+#include "PluginIAPLuaHelper.h"
+#endif
 #include "scripting/lua-bindings/manual/lua_module_register.h"
 
 // #define USE_AUDIO_ENGINE 1
@@ -78,6 +83,13 @@ void AppDelegate::initGLContextAttrs()
 // don't modify or remove this function
 static int register_all_packages()
 {
+#ifdef SDKBOX_ENABLED
+    register_all_PluginIAPLua(LuaEngine::getInstance()->getLuaStack()->getLuaState());
+    register_all_PluginIAPLua_helper(LuaEngine::getInstance()->getLuaStack()->getLuaState());
+#endif
+#ifdef SDKBOX_ENABLED
+    register_all_sdkbox(LuaEngine::getInstance()->getLuaStack()->getLuaState());
+#endif
     return 0; //flag for packages manager
 }
 
